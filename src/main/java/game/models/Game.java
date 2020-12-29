@@ -1,5 +1,8 @@
 package game.models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Game {
 
     private int id;
@@ -7,8 +10,7 @@ public class Game {
     private boolean isFinished;
 
     public Game() {
-        int numAnswer = (int)(Math.random() * 10000);
-        this.answer = Integer.toString(numAnswer);
+        this.answer = generateAnswer();
         this.isFinished = false;
     }
 
@@ -34,6 +36,25 @@ public class Game {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    private String generateAnswer() {
+        String answer = "";
+
+        // Create a list of digits to draw from
+        List<Integer> digits = new ArrayList<Integer>();
+        for (int i = 0; i <= 9; i++) {
+            digits.add(i);
+        }
+
+        // Draw 4 digits at random, removing each to avoid repeats
+        for (int i = 0; i < 4; i++) {
+            int index = (int)( Math.random() * digits.size() );
+            answer += Integer.toString(digits.get(index));
+            digits.remove(index);
+        }
+
+        return answer;
     }
 
 }

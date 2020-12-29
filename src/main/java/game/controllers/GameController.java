@@ -83,17 +83,12 @@ public class GameController {
         int exactMatches = 0;
         int partialMatches = 0;
 
-        for (int g = 0; g < guess.length(); g++) {
-            for (int a = 0; a < answer.length(); a++) {
-                if (guess.charAt(g) == answer.charAt(a)) {
-                    if (g == a) {
-                        exactMatches++;
-                    }
-                    else {
-                        partialMatches++;
-                    }
-                    a = answer.length();
-                }
+        for (int i = 0; i < guess.length(); i++) {
+            if (guess.charAt(i) == answer.charAt(i)) {
+                exactMatches++;
+            }
+            else if (answer.contains(""+guess.charAt(i))) {
+                partialMatches++;
             }
         }
 
